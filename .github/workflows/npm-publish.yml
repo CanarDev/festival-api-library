@@ -1,0 +1,43 @@
+name: npm-publish
+on:
+  push:
+    branches:
+      - main # Change this to your default branch
+jobs:
+  mocha:
+    name: mocha
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: npm test
+
+  tslint:
+    name: eslint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: npm install
+      - name: Run tslint
+        run: npm run tslint
+    needs: mocha
+
+  npm-publish:
+    name: npm-publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+      - run: npm i
+      - run: npm test
+      - uses: JS-DevTools/npm-publish@v2
+        with:
+          token: ${{ secrets.NPM_AUTH_TOKEN }}
+    needs: eslint
