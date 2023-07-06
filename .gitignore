@@ -2,3 +2,6 @@
 package-lock.json
 .idea
 DS_Store
+
+# ignore .js files in the root
+*.js

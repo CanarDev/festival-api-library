@@ -18,35 +18,35 @@ const makeUrlParameters = (parameters: { key: string; value: string }[]) => {
     return urlparam.toString()
 }
 
-export const library = {
+export const getFestivals = {
 
-    getFestivalsData: async (parameters: {key: string, value: string}[]) => {
+    data: async (parameters: {key: string, value: string}[]) => {
         const UrlParameters = makeUrlParameters(parameters)
         return await api(UrlParameters)
     },
 
-    getFestivalsNames: async (parameters: {key: string, value: string}[]) => {
+    names: async (parameters: {key: string, value: string}[]) => {
         const UrlParameters = makeUrlParameters(parameters)
         const response = await api(UrlParameters)
         const festivalsNames = response.records.map((record: { fields: { nom_de_la_manifestation: string } }) => record.fields.nom_de_la_manifestation)
         return festivalsNames
     },
 
-    getFestivalsCities: async (parameters: {key: string, value: string}[]) => {
-        const UrlParameters = makeUrlParameters(parameters)
-        const response = await api(UrlParameters)
-        const festivalsCities = response.records.map((record: { fields: { commune_principale: string } }) => record.fields.commune_principale)
-        return festivalsCities
-    },
-
-    getFestivalsWebsite: async (parameters: {key: string, value: string}[]) => {
+    website: async (parameters: {key: string, value: string}[]) => {
         const UrlParameters = makeUrlParameters(parameters)
         const response = await api(UrlParameters)
         const festivalsWebsite = response.records.map((record: { fields: { site_web: string } }) => record.fields.site_web)
         return festivalsWebsite
     },
 
-    getFestivalsAveragedBegins: async (parameters: {key: string, value: string}[]) => {
+    cities: async (parameters: {key: string, value: string}[]) => {
+        const UrlParameters = makeUrlParameters(parameters)
+        const response = await api(UrlParameters)
+        const festivalsCities = response.records.map((record: { fields: { commune_principale: string } }) => record.fields.commune_principale)
+        return festivalsCities
+    },
+
+    averagedBegins: async (parameters: {key: string, value: string}[]) => {
         const UrlParameters = makeUrlParameters(parameters)
         const response = await api(UrlParameters)
         const festivalsAveragedBegins = response.records.map((record: { fields: { mois_habituel_de_debut: string } }) => record.fields.mois_habituel_de_debut)
@@ -55,5 +55,5 @@ export const library = {
 }
 
 export default {
-    library
+    getFestivals
 }
