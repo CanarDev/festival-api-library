@@ -26,6 +26,7 @@ jobs:
         with:
           node-version: "18"
       - run: npm i
+      - run: npm run build
       - run: npm test
       - uses: JS-DevTools/npm-publish@v2
         with:
